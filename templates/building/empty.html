@@ -1,0 +1,23 @@
+<div id="building-empty">
+	<h2>Edificio disponible</h2>
+	<p>¿Qué quieres construir?</p>
+	<% for (k in BuildingHelper.info) { var info = BuildingHelper.getInfoByType(k); %>
+	<% if (info.purchase != 1) { continue; }%>
+		<label data-type="<%=k%>">
+			<img src="<%=info.image%>">
+			<p>
+				<input type="radio" name="building-type" value="<%=k%>">
+				<%=info.name%>
+			</p>
+		</label>
+	<% } %>
+	<div id="building-description">
+		
+	</div>
+	<div>
+		<% if (building.rent_price !== undefined && building.rent_price !== null) { %>
+		<button id="building-rent-button">Alquilar por <%=Util.formatAmount(building.rent_price)%>€</button>
+	<% } %>
+	<button id="building-purchase-button">Comprar por <%=Util.formatAmount(building.purchase_price)%>€</button>
+	</div>
+</div>

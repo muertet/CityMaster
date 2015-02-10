@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /
+
+
+RewriteRule ^(.*)\.htm$ index.php?route=$1
+
+<IfModule mod_php5.c>
+php_value upload_max_filesize 3000000
+php_value post_max_size 3000000
+</IfModule>

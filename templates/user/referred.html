@@ -1,0 +1,21 @@
+<div>
+<img src="http://mikkojarrahdotcom.files.wordpress.com/2014/08/moneytree.jpg" style="width: 30%;">
+<p>
+	¡Por cada usuario que se registre con esta dirección ganarás 1.000€!
+	<input type="text" value="<%=website%>login.php?ref=<%=User.info.id%>">
+</p>
+</div>
+<div>
+	<% if (list.length == 0) {%>
+		Parece que nadie se ha registrado con tu dirección de referido :(
+	<% } else { %>
+		Usuarios que se han registrado bajo tu referido:
+		<div>
+			<% for (k in list) { var referred = list[k]; %>
+			<div style="border: 1px solid;">
+				<%=referred.nick%>
+			</div>
+			<% } %>
+		</div>
+	<% } %>
+</div>

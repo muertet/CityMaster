@@ -1,0 +1,26 @@
+<div id="market-popup">
+	<div class="column">
+		<table border="1">
+		<tr>
+			<td>Nombre</td>
+			<td>Cantidad</td>
+			<td>Precio</td>
+		</tr>
+		<% for (k in offers) { var offer = offers[k]; %>
+			<tr id="market-offer-<%=offer.id%>" data-info='<%=JSON.stringify(offer)%>'>
+				<td><%=offer.item.name%></td>
+				<td><%=offer.quantity%></td>
+				<td><%=offer.price%> €</td>
+			</tr>
+		<% } %>
+		</table>
+	</div>
+	<div id="market-item" class="column">
+		<img style="width: 123%;" src="/assets/images/market/home.jpg">
+		<h1>¡Bienvenido al mercado!</h1>
+		<p>
+			¡Bienvenido al mercado!
+			Aquí encontrarás todos los objetos necesarios para tu día a día en el juego.
+		</p>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<div id="crafting-popup">
+Vehículos que puedes crear
+<% for (k in recipeList) { var recipe = recipeList[k]; %>
+	<div style="float:left;width:46%;">
+		<div>
+			<img src="<%=recipe.result.item.image%>" style="width: 100px;">
+			<%=recipe.result.item.name%>
+			Partes:
+			<ul>
+				<% for (k in recipe.ingredients) { var item = recipe.ingredients[k]; %>
+				<li><%=item.item.name%> x <%=item.quantity%> [<% if(itemList[item.item.id] !== undefined) { %><%=itemList[item.item.id].quantity%><% } else { %>0<% } %>]</li>
+				<% } %>
+			</ul>
+		</div>
+		<div>
+			<h3>Producir</h3>
+			<label>
+				Cantidad: <input id="crafting-amount-<%=recipe.result.item.id%>" type="number">
+			</label>
+			<button data-result="<%=recipe.result.item.id%>" data-building="<%=type%>">Producir</button>
+		</div>
+	</div>
+<% } %>	
+</div>

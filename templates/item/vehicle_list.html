@@ -1,0 +1,17 @@
+<% if (list.length < 1) { %>
+ <h2 class="center">No tienes ningún vehículo disponible</h2>
+<% } else { %>
+	<% for (k in list) { var vehicle = list[k]; %>
+	<div>
+		<img src="<%=vehicle.image%>" style="width: 9%;">
+		<%=vehicle.name%>
+		Cantidad: <%=vehicle.quantity%>
+		Estado: <%=vehicle.health%>/100
+		<% if (vehicle.health < 100) { %>
+			<button>Reparar</button>
+		<% }else { %>
+			<button class="market-sell-button" data-id="<%=vehicle.id%>">Vender</button>
+		<% } %>
+	</div>
+	<% } %>
+<% } %>

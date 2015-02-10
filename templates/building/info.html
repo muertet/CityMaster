@@ -1,0 +1,53 @@
+<% if (building.dInfo.image !== undefined){ %>
+<img class="building-image" src="<%=building.dInfo.image %>">
+<% } %>
+<h3><%=building.dInfo.name%> <% if (building.owner !==undefined && building.owner.id == User.info.id){%>Lvl <%=building.level%><% } %></h3>
+<hr>
+<p>
+	<%=building.dInfo.description%>
+</p>
+<div class="actions-div">
+	<% if (!building.isBusy()) { %>
+	<% if (building.isPurchasable()){ %>
+		<% if (building.owner === undefined){ %>
+			<% if (building.rent_price !== undefined && building.rent_price !== null) { %>
+				Precio de alquiler: <%=Util.formatAmount(building.rent_price)%>€ / mes <button id="building-rent-button">Alquilar</button><br>
+			<% } %>
+		Precio de compra: <%=Util.formatAmount(building.purchase_price)%>€ <button id="building-purchase-button">Comprar</button>
+		<% }else if (building.owner.id == User.info.id){%>
+			Déposito: <%=building.used_storage%>/<%=building.storage%>
+			<% switch (building.dInfo.type) { case BuildingHelper.TYPE_FACTORY: %>
+					<button id="crafting-popup-button">Producir</button>
+					<button id="garage-vehicle-button">Vehículos</button> 
+				<% break; %>
+			<% } %>
+			<button id="building-upgrade-button" title="Subir de nivel aumentará la capacidad del edificio">Subir al nivel <%=building.level+1%></button>
+			<button id="building-sell-button">Vender</button>
+		<% }else{ %>
+		Propiedad de <a href="<%=building.owner.url %>"><%=building.owner.nick %></a>
+		<% } %>
+	<% } else if (building.isPublic()){ %>
+		Este edificio está compartido entre todos los usuarios que se encuentren cerca.<br>
+		Donando dinero ayudarás a que suba de nivel y sus efectos sean más rápidos/eficazes.<br>
+		Nivel actual: <%=building.donation.level %><br>
+		Dinero recaudado: <span id="donation-pledge" data-amount="<%=building.donation.amount%>"><%=Util.formatAmount(building.donation.amount) %></span> € / <%=Util.formatAmount((building.donation.level+1)*BuildingHelper.LEVEL_MULTIPLIER*10000) %> €<br>
+		Aportar a la causa:
+		<input id="donation-amount" type="number">
+		<button id="building-donation-button">Donar</button>
+	<% } %>
+	<% }else{ %>
+		<% if (building.owner === undefined){ %>
+			Edificio en proceso de venta.
+		<% }else if (building.owner.id == User.info.id){ %>
+			<center>Preparando edificio</center>
+			<img src="http://www.animatedgif.net/underconstruction/5consbar2_e0.gif" style="width: 100%;">
+			
+			Puedes esperar <span id="building-busy-time"></span> o contratar más obreros por 1 <img src="assets/images/currency/gold.png" style="width:20px;" title="oro"> y que lo terminen ahora mismo. 
+			<center>
+				<button id="building-delay-button">Contratar obreros</button>
+			</center>
+		<% } else { %>
+			Propiedad de <a href="<%=building.owner.url %>"><%=building.owner.nick %></a>
+		<% } %>
+	<% } %>
+</div>
